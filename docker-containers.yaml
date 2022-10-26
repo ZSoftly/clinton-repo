@@ -1,0 +1,111 @@
+# ensuring docker daemon & desktop is running
+    docker --version
+
+# command to Check Container Status
+    * List active containers 
+    docker ps
+    * To list all containers 
+    docker ps -a 
+
+# command to get all docker images
+    docker images
+
+    ## We will be using two images to have a Linux environment
+    ubuntu:20.04 && Centos:7
+
+    # To download and image
+    docker pull <image:version/tag)>
+    # ubuntu 20.04 image
+    docker pull ubuntu:20.04
+    # centos:07 20.04 image
+    docker pull centos:7
+
+
+# command to create and run containers
+    # ubuntu && centos container 
+    # --hostname/-h = Container host name
+    # --name = Assign a name to the container
+    # -it = Create the container in interactive mode with a terminal
+    docker run -it --name centos1 -h centos-1 centos:7 bash
+    docker run -it --name ubuntu1 -h ubuntu-1 ubuntu:20.04 bash
+
+    ## To exit out of a container
+    Type the command <exit> until you have returned to your normal terminal
+    NB:
+        When you create the container for the first time, exit the container
+        So that you can manually start or stop it
+
+## Command to start and Stop the container
+    docker start <containerID||name>  == docker start "containerID||name"
+    docker stop <containerID||name> 
+
+    # command to start and stop ubuntu container
+    docker start ubuntu1
+    docker stop ubuntu1
+
+    # command to start and stop centos container
+    docker start centos1
+    docker stop centos1
+
+
+# command to delete docker containers   
+    docker rm <containerID||name> -f
+
+    # command to delete ubuntu container
+    docker rm ubuntu1 -f
+
+    # command to delete and centos container
+    docker rm centos1 -f
+
+    # TO delete multiple containers
+    * ex: docker rm <container1 containe2 container3> -f 
+    docker rm container1 containe2 container3 -f 
+
+# command to delete docker images
+    Prerequisites
+        # Lists all the images you have locally
+        --> visit line 11 <--
+    ## Actual command
+    docker rmi <image1:tag image2:version > -f
+    ## use the image ID because it is local to you
+    docker rmi 825d55fb6340 eeb6ee3f44bd -f
+
+### Dangerous command to use to delete all unused resources
+docker system prune --all --force
+docker system prune -a -f
+
+# docker start
+docker start centos1
+docker start ubuntu1
+
+# enter the containers to execute commands
+docker exec -it centos1 bash
+docker exec -it ubuntu1 bash
+
+# To use the container to practise
+    Step 1: Start the container
+    Step 2: Exec or enter into the container
+    Step 3: Change to the home directory --> cd $HOME
+    Step 4: Update the container
+    
+    # centos container
+        the package manager is --> yum <-- :
+        yum update -y
+
+    # ubuntu container
+        the package manager is --> apt <-- :
+        apt update
+## Whenever you are finished, always stop the container
+    # stop the container
+    docker stop centos1
+    docker stop ubuntu1
+
+
+Tasks for us for Wednesday:
+    YOUR IDE is open with the class directory structure
+    Docker is up and running
+    You have the ubuntu and centos images downloaded as the instructions here
+    You have 2 containers with the names as instructed here
+    You have two terminals with the two different containers
+    You have changed to the home directory 
+    You have updated the containers
