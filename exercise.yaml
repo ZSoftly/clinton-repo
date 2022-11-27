@@ -1,0 +1,105 @@
+    EXERCISE: 
+        * Create two containers
+        * One should be running ubuntu 20.04 and centos 7
+        * Check the distribution, and which package manager each use 
+        * Install the following  CLI editors Nano, Vi, Vim
+        * What software center/software manager does it use
+        * create a user with your name and give it admin rights
+        * create another user and do not give it admin rights
+    
+    Solution:
+      # In this exercise I will be using the docker desktop to run my containers
+      - Chinking if docker desktop is up and runnig:
+        *Click on the "show hidden icons" arrow on the taskbar and move your mouse pointer to highlight the docker Daemon to see if the docker desktop is running.
+        *If docker is not running, you can manually start Docker by double-clicking on the docker icon on your desktop.
+
+      # Create two containers
+        To create || run a container, we need to make sure we have the image of the container that we want to build if it's stored locally in our system.
+        To check if we already have the image in our local computer,:
+
+            $ docker images
+
+        If we don't have the image locally, download them by running this command:
+
+            $ docker pull <image-name>
+
+        In this exercise, I will be downloading two docker images ubuntu 20.04 & centos 7:
+          Commands
+            $ docker pull ununtu:20.04
+            $ docker pull centos:7
+
+        # Now that i have my images, I can start runnig my containers
+          For ubuntu,:
+            $ docker run -it --name clint -h ubuntu-1 ubuntu:20.04 bash
+          For centos,:
+            $ docker run -it --name fcc -h centos-1 centos:7 bash
+
+        To exit a docker container,: use the exit command
+            $ exit
+        To stop a docker container,: use the stop command
+            $ docker stop <container_name||ID>
+        To start a docker container,: Use the start command
+            $ docker start <container_name||ID>
+        To login to a docker container,: run the following commad
+            $ docker exec -it <container_name||ID> <the shell>
+
+        # the parkage maneger for 
+          ubuntu is : apt
+          centos is : yum
+
+        # how to install nano & vim on both containers
+          for ubuntu,:
+            $ apt update -y
+            $ apt install sudo -y
+            $ sudo apt update
+            $ sudo apt install nano -y
+            $ sudo apt update
+            $ sudo apt install vim -y
+          for centos,:
+            $ yum update -y
+            $ yum install sudo -y
+            $ sudo yum update
+            $ sudo yum install nano -y
+            $ sudo yum update
+            $ sudo yum install vim -y
+
+        # create a user with your name and give it admin rights
+          for Ubuntu,:
+            $ sudo adduser clinton
+              User passwd=<username>
+        # Give clinton administrative rights,:
+            Add a user to the sudoers file:
+              # Open the visudo file in the text editor using the following command
+            $ sudo visudo
+              # The position where you see root ALL=(ALL:ALL) ALL is where we’re going to change our username.
+              # Replace the root with “clinton” with the sudoers in my case. Insert the following lines in this file:.
+              ---
+              Root ALL=(ALL:ALL) ALL              
+              clinton ALL=(ALL:ALL) ALL
+              ---
+              Save the file and exit.
+              
+            Adding Sudo User from Usermod Command:
+            $ sudo usermod -aG sudo clinton
+
+          for centos,:
+            $ sudo adduser clinton
+            $ passwd <newuser>=clinton
+              User passwd=<username>
+            giving clinton administrative rights:
+                # in centos, the sudo=administrative group is wheel
+            $ sudo usermod -aG wheel clinton
+
+        # create another user and do not give it admin rights
+          for Ubuntu,:
+            $ sudo adduser nesa
+              User passwd=<username>
+          for Centos,:
+            $ sudo adduser nesa
+            $ passwd <newuser>=nesa
+              User passwd=<username>
+
+        To login as user into a docker containers:
+            $ docker exec -it -u <username> <container_name||ID> <the shell>
+            
+        Practice Practice Practice till you get comfortable.:
