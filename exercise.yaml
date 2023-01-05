@@ -77,7 +77,7 @@
               # Replace the root with “clinton” with the sudoers in my case. Insert the following lines in this file:.
               ---
               Root ALL=(ALL:ALL) ALL              
-              clinton ALL=(ALL:ALL) ALL
+              "User" ALL=(ALL:ALL) ALL
               ---
               Save the file and exit.
               
